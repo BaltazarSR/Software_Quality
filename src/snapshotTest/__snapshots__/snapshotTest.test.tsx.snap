@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`test snapshot > generates a greeting with snapshot 1`] = `
+{
+  "message": "Hello, Balta!",
+  "timestamp": null,
+  "version": 2,
+}
+`;
