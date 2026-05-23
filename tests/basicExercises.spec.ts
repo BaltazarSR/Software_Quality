@@ -73,12 +73,12 @@ test.describe('Methods', () => {
     await page.goto('https://playwright.dev/');
     // Use the page to take a screenshot.
     await page.screenshot({ path: './tests/screenshots/playwright.png'})
-    // Got to GitHub URL.
-    await page.goto('https://github.com/');
     // Use the page once to console.log “Page loaded!”
     page.once('load', msg => {
         console.log('Page loaded!');
     });
+    // Got to GitHub URL.
+    await page.goto('https://github.com/');
     await page.screenshot({ path: './tests/screenshots/github.png'})
     // Navigate to the previous page in history.
     await page.goBack()
