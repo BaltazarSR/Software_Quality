@@ -45,30 +45,29 @@ test('get started link', async ({ page }) => {
 });
 
 test.describe('homework', () => {
+    test('github bad login', async ({ page }) => {
+        await page.goto('https://github.com/');
+        await page.getByRole('link', { name: 'Sign in' }).click();
+        await page
+            .getByRole('textbox', { name: 'Username or email address' })
+            .fill('baltatime@gmail.com');
+        await page.getByRole('textbox', { name: 'Password' }).fill('heeeheee');
 
-  test('github bad login', async ({ page }) => {
-    await page.goto('https://github.com/');
-    await page.getByRole('link', { name: 'Sign in' }).click();
-    await page
-        .getByRole('textbox', { name: 'Username or email address' })
-        .fill('baltatime@gmail.com');
-    await page.getByRole('textbox', { name: 'Password' }).fill('heeeheee');
+        await page.getByRole('button', { name: 'Sign in' }).click();
 
-    await page.getByRole('button', { name: 'Sign in' }).click();
+        await expect(
+            page.getByText('Incorrect username or password.'),
+        ).toBeVisible();
+    });
 
-    await expect(
-        page.getByText('Incorrect username or password.'),
-    ).toBeVisible();
-  });
-
-  test('firefox', async () => {
-    const browser = await firefox.launch();
-    console.log(browser.contexts().length);
-    const context = await browser.newContext();
-    console.log(browser.contexts().length);
-    const page = await context.newPage();
-    await page.goto('https://playwright.dev/');
-    await context.close();
-    await browser.close();
-  });
+    test('firefox', async () => {
+        const browser = await firefox.launch();
+        console.log(browser.contexts().length);
+        const context = await browser.newContext();
+        console.log(browser.contexts().length);
+        const page = await context.newPage();
+        await page.goto('https://playwright.dev/');
+        await context.close();
+        await browser.close();
+    });
 });
